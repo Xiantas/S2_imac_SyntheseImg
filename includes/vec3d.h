@@ -1,8 +1,7 @@
 #pragma once
 
 struct Vec {
-    float x;
-    float y;
+    float x, y, z;
 };
 
 Vec operator +(const Vec& v1, const Vec& v2);
