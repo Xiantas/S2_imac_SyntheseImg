@@ -1,4 +1,4 @@
-#include "vec.h"
+#include "vec3d.h"
 
 //on utilise & au lieu de * car cela nous renvoie directement à la valeur stockée dans le pointeur passé en argument, ça permet ici de faire moins de bêtises
 Vec operator+(const Vec& v1, const Vec& v2) {
