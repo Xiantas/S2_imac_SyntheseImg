@@ -1,6 +1,6 @@
 #pragma once
 
-namespace Inputs {
+/*namespace Inputs {
     namespace Keyboard {
 
     }
@@ -14,3 +14,4 @@ namespace Inputs {
 
     }
 }
+*/
