@@ -2,14 +2,15 @@
 #include <GLFW/glfw3.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
-
+#include "3D_tools.h"
+#include "draw_scene.h"
 #include <cstdio>
 
 #include <iostream>
 
-static const unsigned int WINDOW_WIDTH = 800;
-static const unsigned int WINDOW_HEIGHT = 600;
-static const char WINDOW_TITLE[] = "Place holder name";
+static const unsigned int WINDOW_WIDTH = 1000;
+static const unsigned int WINDOW_HEIGHT = 500;
+static const char WINDOW_TITLE[] = "Proj Img";
 static float aspectRatio = 1.0;
 
 
@@ -18,7 +19,7 @@ static const double FRAMERATE_IN_SECONDS = 1. / 30.;
 
 /* Virtual windows space */
 // Space is defined in interval -1 and 1 on x and y axes
-static const float GL_VIEW_SIZE = 2.;
+//static const float GL_VIEW_SIZE = 2.;
 
 /* Error handling function */
 void onError(int error, const char* description)
@@ -33,8 +34,8 @@ void onWindowResized(GLFWwindow* window, int width, int height)
 	glViewport(0, 0, width, height);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-
-	if( aspectRatio > 1)
+	gluPerspective(60,aspectRatio,Z_NEAR,Z_FAR);
+	/*if( aspectRatio > 1)
 	{
 		gluOrtho2D(
 		-GL_VIEW_SIZE / 2. * aspectRatio, GL_VIEW_SIZE / 2. * aspectRatio,
@@ -45,7 +46,7 @@ void onWindowResized(GLFWwindow* window, int width, int height)
 		gluOrtho2D(
 		-GL_VIEW_SIZE / 2., GL_VIEW_SIZE / 2.,
 		-GL_VIEW_SIZE / 2. / aspectRatio, GL_VIEW_SIZE / 2. / aspectRatio);
-	}
+	}*/
 	glMatrixMode(GL_MODELVIEW);
 
 }
@@ -109,9 +110,51 @@ int main()
 	{
 		/* Get time (in second) at loop beginning */
 		double startTime = glfwGetTime();
+		
 
+		/* Cleaning buffers and setting Matrix Mode */
+		glClearColor(0.2,0.0,0.0,0.0);
+
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+		setCamera();
 		/* Render here */
-		glClear(GL_COLOR_BUFFER_BIT);
+		//Exo1:
+		glPushMatrix();
+		glScalef(10.0,10.0,10.0);
+		//drawFrame();
+		
+		glScalef(10,10,10);
+		glColor3f(1,1,1);
+		drawSquare();
+		glPopMatrix();
+
+		glPushMatrix();
+		glColor3f(1,0,0);
+		glScalef(80,10,20);
+		glTranslatef(0,-2,0.5);
+		glRotatef(90,1,0,0);
+		drawSquare();
+		glPopMatrix();
+		
+		glPushMatrix();
+		glColor3f(0,1,0);
+		glScalef(80,10,20);
+		glTranslatef(0,2,0.5);
+		glRotatef(90,1,0,0);
+		drawSquare();
+		glPopMatrix();
+		
+		glPushMatrix();
+		glColor3f(0,0,1);
+		glScalef(100,80,20);
+		glTranslatef(0,0,1);
+		drawSquare();
+		glPopMatrix();
+
+	
 
         switch (currentDraw) {
             case 0:

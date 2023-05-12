@@ -2,7 +2,7 @@ CC = clang++
 SRCPATH = src
 OBJPATH = objects
 HEADERS = includes
-CXXFLAGS = -g -MMD -Iheaders -std=c++20
+CXXFLAGS = -g -MMD -Iincludes -std=c++20
 LIBFLAGS = -lglfw -lGL -lGLU
 #-lGLU -lm
 SOURCES = $(filter-out $(SRCPATH)/main.cpp $(SRCPATH)/treetest.cpp, $(wildcard $(SRCPATH)/*.cpp))
