@@ -27,5 +27,7 @@ void drawCone();
 
 void drawSphere();
 
+void drawWalls();
+
 /* Small tools */
 float toRad(float deg);

@@ -52,6 +52,34 @@ void drawSphere() {
 	gluSphere(gluNewQuadric(),1.0,NB_SEG_CIRCLE,NB_SEG_CIRCLE);
 }
 
+
 void drawWalls(){
-	
+	glPushMatrix();
+		glScalef(40,60,20);
+		glColor3f(0,0.298,0.90);
+		drawSquare();
+		glPopMatrix();
+
+		glPushMatrix();
+		glColor3f(0,0.592,0.988);
+		glScalef(40,10,20);
+		glTranslatef(0,-3,0.5);
+		glRotatef(90,1,0,0);
+		drawSquare();
+		glPopMatrix();
+		
+		glPushMatrix();
+		glColor3f(0,0.592,0.988);
+		glScalef(40,10,20);
+		glTranslatef(0,3,0.5);
+		glRotatef(90,1,0,0);
+		drawSquare();
+		glPopMatrix();
+		
+		glPushMatrix();
+		glColor3f(0,0.298,0.90);
+		glScalef(40,60,20);
+		glTranslatef(0,0,1);
+		drawSquare();
+		glPopMatrix();
 }

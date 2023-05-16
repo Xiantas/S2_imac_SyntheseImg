@@ -121,38 +121,7 @@ int main()
 		glLoadIdentity();
 		setCamera();
 		/* Render here */
-		//Exo1:
-		glPushMatrix();
-		glScalef(10.0,10.0,10.0);
-		//drawFrame();
-		
-		glScalef(10,10,10);
-		glColor3f(1,1,1);
-		drawSquare();
-		glPopMatrix();
-
-		glPushMatrix();
-		glColor3f(1,0,0);
-		glScalef(80,10,20);
-		glTranslatef(0,-2,0.5);
-		glRotatef(90,1,0,0);
-		drawSquare();
-		glPopMatrix();
-		
-		glPushMatrix();
-		glColor3f(0,1,0);
-		glScalef(80,10,20);
-		glTranslatef(0,2,0.5);
-		glRotatef(90,1,0,0);
-		drawSquare();
-		glPopMatrix();
-		
-		glPushMatrix();
-		glColor3f(0,0,1);
-		glScalef(100,80,20);
-		glTranslatef(0,0,1);
-		drawSquare();
-		glPopMatrix();
+		drawWalls();
 
 	
 
