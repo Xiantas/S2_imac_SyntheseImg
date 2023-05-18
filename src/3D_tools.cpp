@@ -3,7 +3,7 @@
 /* Camera parameters and functions */
 float theta = 0; // Angle between x axis and viewpoint
 float phy = 80.0f; // Angle between z axis and viewpoint
-float dist_zoom = 50.0f; // Distance between origin and viewpoint
+float dist_zoom = 60.0f; // Distance between origin and viewpoint
 float PI=M_PI;
 void setCamera() {
 	gluLookAt(dist_zoom*cos(toRad(theta))*sin(toRad(phy)),
@@ -53,33 +53,109 @@ void drawSphere() {
 }
 
 
-void drawWalls(){
-	glPushMatrix();
+void drawWalls_1(){
+		// mur bas
+		glPushMatrix();
 		glScalef(40,60,20);
-		glColor3f(0,0.298,0.90);
+		glColor3f(0,0.2,0.5);
 		drawSquare();
 		glPopMatrix();
 
+		//mur gauche
 		glPushMatrix();
-		glColor3f(0,0.592,0.988);
+		glColor3f(0,0.2,1);
 		glScalef(40,10,20);
 		glTranslatef(0,-3,0.5);
 		glRotatef(90,1,0,0);
 		drawSquare();
 		glPopMatrix();
 		
+		//mur droit
 		glPushMatrix();
-		glColor3f(0,0.592,0.988);
+		glColor3f(0,0.2,1);
 		glScalef(40,10,20);
 		glTranslatef(0,3,0.5);
 		glRotatef(90,1,0,0);
 		drawSquare();
 		glPopMatrix();
 		
+		//mur haut
 		glPushMatrix();
-		glColor3f(0,0.298,0.90);
+		glColor3f(0,0.2,0.5);
 		glScalef(40,60,20);
 		glTranslatef(0,0,1);
+		drawSquare();
+		glPopMatrix();
+}
+
+void drawWalls_2(){
+		// mur bas
+		glPushMatrix();
+		glScalef(40,60,20);
+		glTranslatef(-1,0,0);
+		glColor3f(0,0.1,0.2);
+		drawSquare();
+		glPopMatrix();
+
+		//mur gauche
+		glPushMatrix();
+		glColor3f(0,0.2,0.6);
+		glScalef(40,10,20);
+		glTranslatef(-1,-3,0.5);
+		glRotatef(90,1,0,0);
+		drawSquare();
+		glPopMatrix();
+		
+		//mur droit
+		glPushMatrix();
+		glColor3f(0,0.2,0.6);
+		glScalef(40,10,20);
+		glTranslatef(-1,3,0.5);
+		glRotatef(90,1,0,0);
+		drawSquare();
+		glPopMatrix();
+		
+		//mur haut
+		glPushMatrix();
+		glColor3f(0,0.1,0.2);
+		glScalef(40,60,20);
+		glTranslatef(-1,0,1);
+		drawSquare();
+		glPopMatrix();
+}
+
+void drawWalls_3(){
+		// mur bas
+		glPushMatrix();
+		glScalef(40,60,20);
+		glTranslatef(1,0,0);
+		glColor3f(0,0.2,0.8);
+		drawSquare();
+		glPopMatrix();
+
+		//mur gauche
+		glPushMatrix();
+		glColor3f(0,0.4,0.9);
+		glScalef(40,10,20);
+		glTranslatef(1,-3,0.5);
+		glRotatef(90,1,0,0);
+		drawSquare();
+		glPopMatrix();
+		
+		//mur droit
+		glPushMatrix();
+		glColor3f(0,0.4,0.9);
+		glScalef(40,10,20);
+		glTranslatef(1,3,0.5);
+		glRotatef(90,1,0,0);
+		drawSquare();
+		glPopMatrix();
+		
+		//mur haut
+		glPushMatrix();
+		glColor3f(0,0.2,0.8);
+		glScalef(40,60,20);
+		glTranslatef(1,0,1);
 		drawSquare();
 		glPopMatrix();
 }

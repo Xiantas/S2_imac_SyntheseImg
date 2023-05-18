@@ -121,9 +121,9 @@ int main()
 		glLoadIdentity();
 		setCamera();
 		/* Render here */
-		drawWalls();
-
-	
+		drawWalls_1();
+		drawWalls_2();
+		drawWalls_3();
 
         switch (currentDraw) {
             case 0:
