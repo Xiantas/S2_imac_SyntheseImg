@@ -2,6 +2,7 @@ CC = clang++
 SRCPATH = src
 OBJPATH = objects
 HEADERS = includes
+BINPATH = bin
 CXXFLAGS = -g -MMD -Iincludes -std=c++20
 LIBFLAGS = -lglfw -lGL -lGLU
 #-lGLU -lm
@@ -10,7 +11,8 @@ OBJ = ${subst $(SRCPATH),$(OBJPATH),$(SOURCES:.cpp=.o)}
 DEPENDS = $(SOURCES:.cpp=.d)
 
 main : $(OBJPATH)/main.o $(OBJ)
-	$(CC) $^ -o $@ $(CXXFLAGS) $(LIBFLAGS)
+	mkdir -p $(BINPATH)
+	$(CC) $^ -o $(BINPATH)/$@ $(CXXFLAGS) $(LIBFLAGS)
 
 $(OBJPATH)/main.o : $(SRCPATH)/main.cpp
 	mkdir -p $(OBJPATH)
