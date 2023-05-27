@@ -2,11 +2,16 @@
 #include <GLFW/glfw3.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <math.h>
+#include <vector>
+#include <list>
 #include "3D_tools.h"
 #include "draw_scene.h"
 #include <cstdio>
-
 #include <iostream>
+#include "stb_image.h"
 
 static const unsigned int WINDOW_WIDTH = 1000;
 static const unsigned int WINDOW_HEIGHT = 500;
@@ -16,6 +21,9 @@ static float aspectRatio = 1.0;
 
 /* Minimal time wanted between two images */
 static const double FRAMERATE_IN_SECONDS = 1. / 30.;
+
+/* Texture */
+unsigned int textureID;
 
 /* Virtual windows space */
 // Space is defined in interval -1 and 1 on x and y axes
@@ -76,6 +84,11 @@ void drawOrigin() {
     glEnd();
 }
 
+bool menuItemSelected = false;
+bool jouerSelected = false;
+bool niveauSelected = false;
+bool quitterSelected = false;
+int menu =0;
 
 int main() 
 {
@@ -105,6 +118,10 @@ int main()
 
 	glPointSize(4.0);
 
+	/*Menu texture*/
+	GLuint textureMenu = loadTexture("../doc/BG.jpg");
+	GLuint textureJouer = loadTexture("../doc/textureJouer.jpg");
+
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))
 	{
@@ -124,6 +141,12 @@ int main()
 		drawWalls_1();
 		drawWalls_2();
 		drawWalls_3();
+
+        /*Scene rendering*/
+		glPushMatrix();
+		glRotatef(90,0,1,0);
+		drawMenu(textureMenu, textureJouer);
+		glPopMatrix();
 
         switch (currentDraw) {
             case 0:
