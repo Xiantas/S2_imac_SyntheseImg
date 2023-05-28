@@ -18,6 +18,10 @@ static const unsigned int WINDOW_HEIGHT = 500;
 static const char WINDOW_TITLE[] = "Proj Img";
 static float aspectRatio = 1.0;
 
+bool menuSelected = true;
+bool jouerSelected = false;
+bool level1Selected= false;
+int menu =0;
 
 /* Minimal time wanted between two images */
 static const double FRAMERATE_IN_SECONDS = 1. / 30.;
@@ -60,6 +64,7 @@ void onWindowResized(GLFWwindow* window, int width, int height)
 }
 
 int currentDraw = 0;
+
 void onKey(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
     if (action == GLFW_PRESS) {
@@ -67,6 +72,11 @@ void onKey(GLFWwindow* window, int key, int scancode, int action, int mods)
             glfwSetWindowShouldClose(window, GLFW_TRUE);
         } if (key == GLFW_KEY_SPACE) {
             currentDraw = (currentDraw+1)%3;
+        } if (key == GLFW_KEY_P) {
+            jouerSelected= true;
+        } if (key == GLFW_KEY_1) {
+			
+            level1Selected= true;
         }
 
         std::cout << "Key: " << key << " | Scan: " << scancode << "\n";
@@ -120,7 +130,16 @@ int main()
 
 	/*Menu texture*/
 	GLuint textureMenu = loadTexture("../doc/BG.jpg");
-	GLuint textureJouer = loadTexture("../doc/textureJouer.jpg");
+	GLuint textureJouer = loadTexture("../doc/BTN_PLAY.jpg");
+	GLuint textureQuitter = loadTexture("../doc/BTN_EXIT.jpg");
+	GLuint textureLevelsMenu = loadTexture("../doc/BG_LEVELS.jpg");
+	GLuint textureLevel1 = loadTexture("../doc/BTN_LEVEL_1.jpg");
+	GLuint textureLevel2 = loadTexture("../doc/BTN_LEVEL_2.jpg");
+	GLuint textureLevel3 = loadTexture("../doc/BTN_LEVEL_3.jpg");
+	GLuint textureLevel4 = loadTexture("../doc/BTN_LEVEL_4.jpg");
+	GLuint textureEndMenu = loadTexture("../doc/BG_END.jpg");
+	GLuint textureGoMenu = loadTexture("../doc/BTN_GO_MENU.jpg");
+	GLuint textureScore = loadTexture("../doc/SCORE.jpg");
 
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))
@@ -138,15 +157,35 @@ int main()
 		glLoadIdentity();
 		setCamera();
 		/* Render here */
-		drawWalls_1();
-		drawWalls_2();
-		drawWalls_3();
+		
 
         /*Scene rendering*/
-		glPushMatrix();
-		glRotatef(90,0,1,0);
-		drawMenu(textureMenu, textureJouer);
-		glPopMatrix();
+		/*MENU*/
+		//Affichage menu principal
+		if (menuSelected)
+		{	glPushMatrix();
+			glRotatef(90,0,1,0);
+			drawMenu(textureMenu, textureJouer, textureQuitter);
+			glPopMatrix();
+		}
+		
+		//Passage au "MenuLevels"
+		if(jouerSelected){
+			menuSelected=false;
+			
+			glPushMatrix();
+			glRotatef(90,0,1,0);
+        	drawLevelsMenu(textureLevelsMenu, textureLevel1, textureLevel2, textureLevel3, textureLevel4); // Appeler la fonction de menu
+			glPopMatrix();
+		}
+
+		//Passage au jeu niveau 1	
+		if(level1Selected){
+			jouerSelected=false;
+			drawWalls_1();
+			drawWalls_2();
+			drawWalls_3();
+		}
 
         switch (currentDraw) {
             case 0:
@@ -169,6 +208,18 @@ int main()
 		}
 	}
 
+	deleteTexture(textureMenu);
+	deleteTexture(textureJouer);
+	deleteTexture(textureQuitter);
+	deleteTexture(textureLevelsMenu);
+	deleteTexture(textureLevel1);
+	deleteTexture(textureLevel2);
+	deleteTexture(textureLevel3);
+	deleteTexture(textureLevel4);
+	deleteTexture(textureEndMenu);
+	deleteTexture(textureGoMenu);
+	deleteTexture(textureScore);
+	
 	glfwTerminate();
 	return 0;
 }
