@@ -325,6 +325,28 @@ void drawEndMenu(GLuint textureEndMenu, GLuint textureGoMenu,GLuint textureScore
 
 }
 
+void drawScore( GLuint textureChiffre){	
+	//texture Chiffre
+	glPushMatrix();
+	drawTexture(textureChiffre);
+	glRotatef(90,0,0,1);
+	glRotatef(-10,1,0,0);
+	glTranslatef(38,20,20);
+	glScalef(1.4,2,1);
+	glBegin(GL_QUADS);
+	//ajouter un z sinon à cause du zbuffer ça se dessine derrière tout
+	glTexCoord3f(0,1,0);
+	glVertex3d(-1,-1,0);
+	glTexCoord3f(1,1,0);
+	glVertex3d(1,-1,0);
+	glTexCoord3f(1,0,0);
+	glVertex3d(1,1,0);
+	glTexCoord3f(0,0,0);
+	glVertex3d(-1,1,0);
+	glEnd();
+	finTexture();
+	glPopMatrix();
+}
 
 
 	

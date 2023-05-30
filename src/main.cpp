@@ -137,9 +137,22 @@ int main()
 	GLuint textureLevel2 = loadTexture("../doc/BTN_LEVEL_2.jpg");
 	GLuint textureLevel3 = loadTexture("../doc/BTN_LEVEL_3.jpg");
 	GLuint textureLevel4 = loadTexture("../doc/BTN_LEVEL_4.jpg");
-	GLuint textureEndMenu = loadTexture("../doc/BG_END.jpg");
-	GLuint textureGoMenu = loadTexture("../doc/BTN_GO_MENU.jpg");
-	GLuint textureScore = loadTexture("../doc/SCORE.jpg");
+	//GLuint textureEndMenu = loadTexture("../doc/BG_END.jpg");
+	//GLuint textureGoMenu = loadTexture("../doc/BTN_GO_MENU.jpg");
+	//GLuint textureScore = loadTexture("../doc/SCORE.jpg");
+	GLuint textureScore = loadTexture("../doc/TEXT_SCORE.jpg");
+	GLuint textureChiffre[10];
+	textureChiffre[0] = loadTexture("../doc/CHIFFRE_0.jpg");
+	textureChiffre[1] = loadTexture("../doc/CHIFFRE_1.jpg");
+	textureChiffre[2] = loadTexture("../doc/CHIFFRE_2.jpg");
+	textureChiffre[3] = loadTexture("../doc/CHIFFRE_3.jpg");
+	textureChiffre[4] = loadTexture("../doc/CHIFFRE_4.jpg");
+	textureChiffre[5] = loadTexture("../doc/CHIFFRE_5.jpg");
+	textureChiffre[6] = loadTexture("../doc/CHIFFRE_6.jpg");
+	textureChiffre[7] = loadTexture("../doc/CHIFFRE_7.jpg");
+	textureChiffre[8] = loadTexture("../doc/CHIFFRE_8.jpg");
+	textureChiffre[9] = loadTexture("../doc/CHIFFRE_9.jpg");
+
 
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))
@@ -186,6 +199,25 @@ int main()
 			drawWalls_2();
 			drawWalls_3();
 		}
+		
+		/*AFFICHAGE SCORE*/
+		int score = 348;
+		int digits[3];
+		int temp = score;
+		for (int i = 2; i >= 0; i--) {
+    		digits[i] = temp % 10;
+    		temp /= 10;
+		}
+		glPushMatrix();
+		glRotatef(90,0,1,0);
+		int decal=0;	
+		for (int i = 0; i < 3; i++) {
+    		drawScore(textureChiffre[digits[i]]);
+			decal=3;
+			glTranslatef(0,decal,0);
+		}
+		
+		glPopMatrix();
 
         switch (currentDraw) {
             case 0:
@@ -216,9 +248,9 @@ int main()
 	deleteTexture(textureLevel2);
 	deleteTexture(textureLevel3);
 	deleteTexture(textureLevel4);
-	deleteTexture(textureEndMenu);
-	deleteTexture(textureGoMenu);
-	deleteTexture(textureScore);
+	//deleteTexture(textureEndMenu);
+	//deleteTexture(textureGoMenu);
+	//deleteTexture(textureScore);
 	
 	glfwTerminate();
 	return 0;
