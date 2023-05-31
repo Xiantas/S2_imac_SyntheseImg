@@ -15,6 +15,8 @@ void drawTexture(GLuint texture);
 void finTexture();
 void deleteTexture(GLuint texture);
 
+void drawBall();
+
 void drawMenuCase(GLuint textureMenu);
 void drawMenu(GLuint textureMenu, GLuint textureJouer, GLuint textureQuitter);
 void drawLevelsMenu(GLuint textureLevelsMenu,GLuint textureLevel1, GLuint textureLevel2, GLuint textureLevel3, GLuint textureLevel4);

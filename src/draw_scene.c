@@ -65,6 +65,13 @@ void deleteTexture(GLuint texture){
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
+void drawBall(){
+	glColor3f(1,1,1);
+	GLUquadricObj *quadric = gluNewQuadric();
+	gluQuadricTexture(quadric, GL_TRUE);
+	gluDeleteQuadric(quadric);
+	gluSphere(quadric, 3, 32, 32);
+}
 
 void drawMenu(GLuint textureMenu, GLuint textureJouer, GLuint textureQuitter){
 	//drawBG (pour que le texte "menu" soit visible)

@@ -128,7 +128,7 @@ int main()
 
 	glPointSize(4.0);
 
-	/*Menu texture*/
+	/*TEXTURES MENU*/
 	GLuint textureMenu = loadTexture("../doc/BG.jpg");
 	GLuint textureJouer = loadTexture("../doc/BTN_PLAY.jpg");
 	GLuint textureQuitter = loadTexture("../doc/BTN_EXIT.jpg");
@@ -140,7 +140,8 @@ int main()
 	//GLuint textureEndMenu = loadTexture("../doc/BG_END.jpg");
 	//GLuint textureGoMenu = loadTexture("../doc/BTN_GO_MENU.jpg");
 	//GLuint textureScore = loadTexture("../doc/SCORE.jpg");
-	GLuint textureScore = loadTexture("../doc/TEXT_SCORE.jpg");
+	
+	/*TEXTURES SCORE*/
 	GLuint textureChiffre[10];
 	textureChiffre[0] = loadTexture("../doc/CHIFFRE_0.jpg");
 	textureChiffre[1] = loadTexture("../doc/CHIFFRE_1.jpg");
@@ -152,6 +153,9 @@ int main()
 	textureChiffre[7] = loadTexture("../doc/CHIFFRE_7.jpg");
 	textureChiffre[8] = loadTexture("../doc/CHIFFRE_8.jpg");
 	textureChiffre[9] = loadTexture("../doc/CHIFFRE_9.jpg");
+
+	/*TEXTURE BALL*/
+	GLuint textureBall = loadTexture("../doc/BALL.jpg");
 
 
 	/* Loop until the user closes the window */
@@ -192,32 +196,35 @@ int main()
 			glPopMatrix();
 		}
 
-		//Passage au jeu niveau 1	
-		if(level1Selected){
-			jouerSelected=false;
-			drawWalls_1();
-			drawWalls_2();
-			drawWalls_3();
-		}
-		
-		/*AFFICHAGE SCORE*/
+		//Passage au jeu niveau 1
 		int score = 348;
 		int digits[3];
 		int temp = score;
 		for (int i = 2; i >= 0; i--) {
     		digits[i] = temp % 10;
     		temp /= 10;
+		}	
+		if(level1Selected){
+			jouerSelected=false;
+			drawWalls_1();
+			drawWalls_2();
+			drawWalls_3();
+			
+			/*AFFICHAGE SCORE*/
+			glPushMatrix();
+			glRotatef(90,0,1,0);
+			int decal=0;	
+			for (int i = 0; i < 3; i++) {
+    			drawScore(textureChiffre[digits[i]]);
+				decal=3;
+				glTranslatef(0,decal,0);
 		}
-		glPushMatrix();
-		glRotatef(90,0,1,0);
-		int decal=0;	
-		for (int i = 0; i < 3; i++) {
-    		drawScore(textureChiffre[digits[i]]);
-			decal=3;
-			glTranslatef(0,decal,0);
+			glPopMatrix();
+			/*AFFICHAGE BALL*/
+			drawTexture(textureBall);
+			drawBall();
+			finTexture();
 		}
-		
-		glPopMatrix();
 
         switch (currentDraw) {
             case 0:
