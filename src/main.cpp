@@ -21,6 +21,8 @@ static float aspectRatio = 1.0;
 bool menuSelected = true;
 bool jouerSelected = false;
 bool level1Selected= false;
+bool goMenuSelected= false;
+bool endMenuSelected=true;
 int menu =0;
 
 /* Minimal time wanted between two images */
@@ -75,8 +77,9 @@ void onKey(GLFWwindow* window, int key, int scancode, int action, int mods)
         } if (key == GLFW_KEY_P) {
             jouerSelected= true;
         } if (key == GLFW_KEY_1) {
-			
             level1Selected= true;
+        }if (key == GLFW_KEY_M) {
+            goMenuSelected= true;
         }
 
         std::cout << "Key: " << key << " | Scan: " << scancode << "\n";
@@ -94,11 +97,6 @@ void drawOrigin() {
     glEnd();
 }
 
-bool menuItemSelected = false;
-bool jouerSelected = false;
-bool niveauSelected = false;
-bool quitterSelected = false;
-int menu =0;
 
 int main() 
 {
@@ -123,7 +121,7 @@ int main()
 
 	glfwSetWindowSizeCallback(window,onWindowResized);
 	glfwSetKeyCallback(window, onKey);
-
+	glfwSetWindowAspectRatio(window,1000,500);
 	onWindowResized(window,WINDOW_WIDTH,WINDOW_HEIGHT);
 
 	glPointSize(4.0);
@@ -137,10 +135,8 @@ int main()
 	GLuint textureLevel2 = loadTexture("../doc/BTN_LEVEL_2.jpg");
 	GLuint textureLevel3 = loadTexture("../doc/BTN_LEVEL_3.jpg");
 	GLuint textureLevel4 = loadTexture("../doc/BTN_LEVEL_4.jpg");
-	//GLuint textureEndMenu = loadTexture("../doc/BG_END.jpg");
-	//GLuint textureGoMenu = loadTexture("../doc/BTN_GO_MENU.jpg");
-	//GLuint textureScore = loadTexture("../doc/SCORE.jpg");
-	
+	GLuint textureEndMenu = loadTexture("../doc/MENU_END.jpg");
+
 	/*TEXTURES SCORE*/
 	GLuint textureChiffre[10];
 	textureChiffre[0] = loadTexture("../doc/CHIFFRE_0.jpg");
@@ -220,11 +216,46 @@ int main()
 				glTranslatef(0,decal,0);
 		}
 			glPopMatrix();
+
 			/*AFFICHAGE BALL*/
 			drawTexture(textureBall);
 			drawBall();
 			finTexture();
 		}
+
+		/*MENU FIN*/
+		// glPushMatrix();
+		// glRotatef(90,0,1,0);
+		// drawEndMenu(textureEndMenu);
+		// glPopMatrix();
+		// endTexture();
+		
+		// int score = 348;
+		// int digits[3];
+		// int temp = score;
+		// for (int i = 2; i >= 0; i--) {
+    	// 	digits[i] = temp % 10;
+    	// 	temp /= 10;
+		// }	
+		// glPushMatrix();
+		//glTranslatef(10,-13,20);
+		// glRotatef(90,0,1,0);
+		// int decal=0;	
+		// for (int i = 0; i < 3; i++) {
+    	// 	drawScore(textureChiffre[digits[i]]);
+		// 	decal=3;
+		// 	glTranslatef(0,decal,0);
+		// }
+		// glPopMatrix();
+
+		// if(goMenuSelected){
+		// 	endMenuSelected=false;
+		// 	menuSelected=true;
+		// 	glPushMatrix();
+		// 	glRotatef(90,0,1,0);
+		// 	drawMenu(textureMenu, textureJouer, textureQuitter);
+		// 	glPopMatrix();
+		// }
 
         switch (currentDraw) {
             case 0:
@@ -255,9 +286,8 @@ int main()
 	deleteTexture(textureLevel2);
 	deleteTexture(textureLevel3);
 	deleteTexture(textureLevel4);
-	//deleteTexture(textureEndMenu);
-	//deleteTexture(textureGoMenu);
-	//deleteTexture(textureScore);
+	deleteTexture(textureEndMenu);
+	deleteTexture(textureBall);	
 	
 	glfwTerminate();
 	return 0;
