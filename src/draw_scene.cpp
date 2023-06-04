@@ -28,7 +28,6 @@ void drawFrame(){
 		glVertex3f(0.0,0.0,0.0);
         glVertex3f(0,0,0.5);
     glEnd();
-
 }
 
 GLuint loadTexture(const char* fileName){
@@ -36,7 +35,7 @@ GLuint loadTexture(const char* fileName){
 	unsigned char* image;
 	image = stbi_load(fileName, &x, &y, &n, 0);
 	if(image==NULL){
-		printf ("erreur");
+		printf ("erreur\n");
 	}
 	GLuint texture;
 	glGenTextures(1, &texture);
@@ -80,7 +79,7 @@ void drawMenu(GLuint textureMenu, GLuint textureJouer, GLuint textureQuitter){
 	glRotatef(-10,1,0,0);
 	glTranslatef(0,0,10);
 	glScalef(60,30,1);
-	glBegin(GL_QUADS);
+	glBegin(GL_TRIANGLE_FAN);
 	//ajouter un z sinon à cause du zbuffer ça se dessine derrière tout
 	glTexCoord3f(0,1,0);
 	glVertex3d(-1,-1,0);
@@ -101,7 +100,7 @@ void drawMenu(GLuint textureMenu, GLuint textureJouer, GLuint textureQuitter){
 	glRotatef(-10,1,0,0);
 	glTranslatef(0,0,10);
 	glScalef(15,6,1);
-	glBegin(GL_QUADS);
+	glBegin(GL_TRIANGLE_FAN);
 	//ajouter un z sinon à cause du zbuffer ça se dessine derrière tout
 	glTexCoord3f(0,1,0);
 	glVertex3d(-1,-1,0);
@@ -122,7 +121,7 @@ void drawMenu(GLuint textureMenu, GLuint textureJouer, GLuint textureQuitter){
 	glRotatef(-10,1,0,0);
 	glTranslatef(0,-15,10);
 	glScalef(15,6,1);
-	glBegin(GL_QUADS);
+	glBegin(GL_TRIANGLE_FAN);
 	//ajouter un z sinon à cause du zbuffer ça se dessine derrière tout
 	glTexCoord3f(0,1,0);
 	glVertex3d(-1,-1,0);
@@ -152,7 +151,7 @@ void drawLevelsMenu(GLuint textureLevelsMenu, GLuint textureLevel1, GLuint textu
 	glRotatef(-10,1,0,0);
 	glTranslatef(0,0,10);
 	glScalef(60,30,1);
-	glBegin(GL_QUADS);
+	glBegin(GL_TRIANGLE_FAN);
 	//ajouter un z sinon à cause du zbuffer ça se dessine derrière tout
 	glTexCoord3f(0,1,0);
 	glVertex3d(-1,-1,0);
@@ -173,7 +172,7 @@ void drawLevelsMenu(GLuint textureLevelsMenu, GLuint textureLevel1, GLuint textu
 	glRotatef(-10,1,0,0);
 	glTranslatef(-15,0,10);
 	glScalef(6,6,1);
-	glBegin(GL_QUADS);
+	glBegin(GL_TRIANGLE_FAN);
 	//ajouter un z sinon à cause du zbuffer ça se dessine derrière tout
 	glTexCoord3f(0,1,0);
 	glVertex3d(-1,-1,0);
@@ -194,7 +193,7 @@ void drawLevelsMenu(GLuint textureLevelsMenu, GLuint textureLevel1, GLuint textu
 	glRotatef(-10,1,0,0);
 	glTranslatef(15,0,10);
 	glScalef(6,6,1);
-	glBegin(GL_QUADS);
+	glBegin(GL_TRIANGLE_FAN);
 	//ajouter un z sinon à cause du zbuffer ça se dessine derrière tout
 	glTexCoord3f(0,1,0);
 	glVertex3d(-1,-1,0);
@@ -215,7 +214,7 @@ void drawLevelsMenu(GLuint textureLevelsMenu, GLuint textureLevel1, GLuint textu
 	glRotatef(-10,1,0,0);
 	glTranslatef(-15,-15,10);
 	glScalef(6,6,1);
-	glBegin(GL_QUADS);
+	glBegin(GL_TRIANGLE_FAN);
 	//ajouter un z sinon à cause du zbuffer ça se dessine derrière tout
 	glTexCoord3f(0,1,0);
 	glVertex3d(-1,-1,0);
@@ -236,7 +235,7 @@ void drawLevelsMenu(GLuint textureLevelsMenu, GLuint textureLevel1, GLuint textu
 	glRotatef(-10,1,0,0);
 	glTranslatef(15,-15,10);
 	glScalef(6,6,1);
-	glBegin(GL_QUADS);
+	glBegin(GL_TRIANGLE_FAN);
 	//ajouter un z sinon à cause du zbuffer ça se dessine derrière tout
 	glTexCoord3f(0,1,0);
 	glVertex3d(-1,-1,0);
@@ -266,7 +265,7 @@ void drawEndMenu(GLuint textureEndMenu, GLuint textureGoMenu,GLuint textureScore
 	glRotatef(-10,1,0,0);
 	glTranslatef(0,0,10);
 	glScalef(60,30,1);
-	glBegin(GL_QUADS);
+	glBegin(GL_TRIANGLE_FAN);
 	//ajouter un z sinon à cause du zbuffer ça se dessine derrière tout
 	glTexCoord3f(0,1,0);
 	glVertex3d(-1,-1,0);
@@ -287,7 +286,7 @@ void drawEndMenu(GLuint textureEndMenu, GLuint textureGoMenu,GLuint textureScore
 	glRotatef(-10,1,0,0);
 	glTranslatef(0,0,10);
 	glScalef(15,6,1);
-	glBegin(GL_QUADS);
+	glBegin(GL_TRIANGLE_FAN);
 	//ajouter un z sinon à cause du zbuffer ça se dessine derrière tout
 	glTexCoord3f(0,1,0);
 	glVertex3d(-1,-1,0);
@@ -308,7 +307,7 @@ void drawEndMenu(GLuint textureEndMenu, GLuint textureGoMenu,GLuint textureScore
 	glRotatef(-10,1,0,0);
 	glTranslatef(0,-15,10);
 	glScalef(15,6,1);
-	glBegin(GL_QUADS);
+	glBegin(GL_TRIANGLE_FAN);
 	//ajouter un z sinon à cause du zbuffer ça se dessine derrière tout
 	glTexCoord3f(0,1,0);
 	glVertex3d(-1,-1,0);
@@ -321,10 +320,4 @@ void drawEndMenu(GLuint textureEndMenu, GLuint textureGoMenu,GLuint textureScore
 	glEnd();
 	finTexture();
 	glPopMatrix();
-
-
 }
-
-
-
-	
