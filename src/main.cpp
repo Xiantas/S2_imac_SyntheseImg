@@ -94,11 +94,13 @@ void drawOrigin() {
     glEnd();
 }
 
+/*
 bool menuItemSelected = false;
 bool jouerSelected = false;
 bool niveauSelected = false;
 bool quitterSelected = false;
 int menu =0;
+*/
 
 int main() 
 {
@@ -129,17 +131,17 @@ int main()
 	glPointSize(4.0);
 
 	/*Menu texture*/
-	GLuint textureMenu = loadTexture("../doc/BG.jpg");
-	GLuint textureJouer = loadTexture("../doc/BTN_PLAY.jpg");
-	GLuint textureQuitter = loadTexture("../doc/BTN_EXIT.jpg");
-	GLuint textureLevelsMenu = loadTexture("../doc/BG_LEVELS.jpg");
-	GLuint textureLevel1 = loadTexture("../doc/BTN_LEVEL_1.jpg");
-	GLuint textureLevel2 = loadTexture("../doc/BTN_LEVEL_2.jpg");
-	GLuint textureLevel3 = loadTexture("../doc/BTN_LEVEL_3.jpg");
-	GLuint textureLevel4 = loadTexture("../doc/BTN_LEVEL_4.jpg");
-	GLuint textureEndMenu = loadTexture("../doc/BG_END.jpg");
-	GLuint textureGoMenu = loadTexture("../doc/BTN_GO_MENU.jpg");
-	GLuint textureScore = loadTexture("../doc/SCORE.jpg");
+	GLuint textureMenu = loadTexture("doc/BG.jpg");
+	GLuint textureJouer = loadTexture("doc/BTN_PLAY.jpg");
+	GLuint textureQuitter = loadTexture("doc/BTN_EXIT.jpg");
+	GLuint textureLevelsMenu = loadTexture("doc/BG_LEVELS.jpg");
+	GLuint textureLevel1 = loadTexture("doc/BTN_LEVEL_1.jpg");
+	GLuint textureLevel2 = loadTexture("doc/BTN_LEVEL_2.jpg");
+	GLuint textureLevel3 = loadTexture("doc/BTN_LEVEL_3.jpg");
+	GLuint textureLevel4 = loadTexture("doc/BTN_LEVEL_4.jpg");
+	GLuint textureEndMenu = loadTexture("doc/BG_END.jpg");
+	GLuint textureGoMenu = loadTexture("doc/BTN_GO_MENU.jpg");
+	GLuint textureScore = loadTexture("doc/SCORE.jpg");
 
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))
