@@ -149,19 +149,19 @@ int main()
 
 	/*TEXTURES SCORE*/
 	GLuint textureChiffre[10];
-	textureChiffre[0] = loadTexture("doc/CHIFFRE_0.jpg");
-	textureChiffre[1] = loadTexture("doc/CHIFFRE_1.jpg");
-	textureChiffre[2] = loadTexture("doc/CHIFFRE_2.jpg");
-	textureChiffre[3] = loadTexture("doc/CHIFFRE_3.jpg");
-	textureChiffre[4] = loadTexture("doc/CHIFFRE_4.jpg");
-	textureChiffre[5] = loadTexture("doc/CHIFFRE_5.jpg");
-	textureChiffre[6] = loadTexture("doc/CHIFFRE_6.jpg");
-	textureChiffre[7] = loadTexture("doc/CHIFFRE_7.jpg");
-	textureChiffre[8] = loadTexture("doc/CHIFFRE_8.jpg");
-	textureChiffre[9] = loadTexture("doc/CHIFFRE_9.jpg");
+	textureChiffre[0] = loadTexturePNG("doc/CHIFFRE_0.png");
+	textureChiffre[1] = loadTexturePNG("doc/CHIFFRE_1.png");
+	textureChiffre[2] = loadTexturePNG("doc/CHIFFRE_2.png");
+	textureChiffre[3] = loadTexturePNG("doc/CHIFFRE_3.png");
+	textureChiffre[4] = loadTexturePNG("doc/CHIFFRE_4.png");
+	textureChiffre[5] = loadTexturePNG("doc/CHIFFRE_5.png");
+	textureChiffre[6] = loadTexturePNG("doc/CHIFFRE_6.png");
+	textureChiffre[7] = loadTexturePNG("doc/CHIFFRE_7.png");
+	textureChiffre[8] = loadTexturePNG("doc/CHIFFRE_8.png");
+	textureChiffre[9] = loadTexturePNG("doc/CHIFFRE_9.png");
 
 	/*TEXTURE BALL*/
-	GLuint textureBall = loadTexture("../doc/BALL.jpg");
+	GLuint textureBall = loadTexture("doc/BALL.jpg");
 
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))

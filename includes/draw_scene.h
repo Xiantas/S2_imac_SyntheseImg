@@ -11,6 +11,7 @@ void drawFrame();
 void drawBase();
 
 GLuint loadTexture(const char* fileName);
+GLuint loadTexturePNG(const char* fileName);
 void drawTexture(GLuint texture);
 void endTexture();
 void deleteTexture(GLuint texture);

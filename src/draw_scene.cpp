@@ -35,7 +35,7 @@ GLuint loadTexture(const char* fileName){
 	unsigned char* image;
 	image = stbi_load(fileName, &x, &y, &n, 0);
 	if(image==NULL){
-		printf ("erreur\n");
+		printf ("erreur : \"%s\" not found\n", fileName);
 	}
 	GLuint texture;
 	glGenTextures(1, &texture);
@@ -53,23 +53,23 @@ void drawTexture(GLuint texture){
 	glBindTexture(GL_TEXTURE_2D, texture);
 }
 
-// GLuint loadTexturePNG(const char* fileName){
-// 	int x, y, n;
-// 	unsigned char* image;
-// 	image = stbi_load(fileName, &x, &y, &n, 0);
-// 	if(image==NULL){
-// 		printf ("erreur");
-// 	}
-// 	GLuint texture;
-// 	glGenTextures(1, &texture);
+GLuint loadTexturePNG(const char* fileName){
+	int x, y, n;
+	unsigned char* image;
+	image = stbi_load(fileName, &x, &y, &n, 0);
+	if(image==NULL){
+		printf ("erreur");
+	}
+	GLuint texture;
+	glGenTextures(1, &texture);
 
-// 	glBindTexture(GL_TEXTURE_2D, texture);
-// 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-// 	glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, x, y, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
-// 	stbi_image_free(image);
+	glBindTexture(GL_TEXTURE_2D, texture);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, x, y, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
+	stbi_image_free(image);
 
-// 	return texture;
-// }
+	return texture;
+ }
 
 // void drawTexturePNG(GLuint texture){
 // 	glEnable(GL_ALPHA_TEST);
