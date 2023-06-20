@@ -10,7 +10,7 @@ void drawFrame();
 
 void drawBase();
 
-GLuint loadTexture(const char* fileName);
+GLuint loadTexture(const char* fileName, int &width, int &height);
 GLuint loadTexturePNG(const char* fileName);
 void drawTexture(GLuint texture);
 void endTexture();

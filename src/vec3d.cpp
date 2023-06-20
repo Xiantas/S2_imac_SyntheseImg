@@ -1,6 +1,11 @@
 #include "vec3d.h"
 
-//on utilise & au lieu de * car cela nous renvoie directement à la valeur stockée dans le pointeur passé en argument, ça permet ici de faire moins de bêtises
+#include <cmath>
+
+float Vec::norm() {
+    return sqrt(*this|*this);
+}
+
 Vec operator+(const Vec& v1, const Vec& v2) {
     return Vec{v1.x + v2.x, v1.y + v2.y, v1.z + v2.z};
 } 

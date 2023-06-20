@@ -4,53 +4,23 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
-void drawBase() {
-	glColor3f(0.92,0.81,0.20);
-	glPushMatrix();
-	glScalef(3,3,1);
-	drawCircle();
-	glPopMatrix();
-	glScalef(2,2,10);
-	drawCone();
-}
-
-void drawFrame(){
-    glBegin(GL_LINES);
-		glColor3f(1.0,0,0.0);
-		glVertex3f(0.0,0.0,0.0);
-        glVertex3f(0.5,0.0,0.0);
-
-		glColor3f(0,1,0.0);
-		glVertex3f(0.0,0.0,0.0);
-        glVertex3f(0,0.5,0.0);
-
-		glColor3f(0,0,1);
-		glVertex3f(0.0,0.0,0.0);
-        glVertex3f(0,0,0.5);
-    glEnd();
-}
-
-GLuint loadTexture(const char* fileName){
-	int x, y, n;
+GLuint loadTexture(const char* fileName, int &width, int &height){
+	int n;
 	unsigned char* image;
-	image = stbi_load(fileName, &x, &y, &n, 0);
+	image = stbi_load(fileName, &width, &height, &n, 0);
 	if(image==NULL){
 		printf ("erreur : \"%s\" not found\n", fileName);
 	}
 	GLuint texture;
 	glGenTextures(1, &texture);
 
+    GLint format = (n == 3 ? GL_RGB : GL_RGBA);
+
 	glBindTexture(GL_TEXTURE_2D, texture);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexImage2D( GL_TEXTURE_2D, 0, GL_RGB, x, y, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+	glTexImage2D( GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, image);
 	stbi_image_free(image);
 	return texture;
-
-}
-
-void drawTexture(GLuint texture){
-	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, texture);
 }
 
 GLuint loadTexturePNG(const char* fileName){
@@ -88,23 +58,25 @@ void drawBall(){
 	glColor3f(1,1,1);
 	GLUquadricObj *quadric = gluNewQuadric();
 	gluQuadricTexture(quadric, GL_TRUE);
-	gluDeleteQuadric(quadric);
 	gluSphere(quadric, 3, 32, 32);
+	gluDeleteQuadric(quadric);
 }
 
 void drawMenu(GLuint textureMenu, GLuint textureJouer, GLuint textureQuitter){
 	//drawBG (pour que le texte "menu" soit visible)
+    /*
 	glPushMatrix();
 	glColor3f(1,1,1);
 	glScalef(10,100,200);
 	drawSquare();
 	glPopMatrix();
+    */
 	//texture Menu	
-	glPushMatrix();
+	//glPushMatrix();
 	drawTexture(textureMenu);
-	glRotatef(90,0,0,1);
-	glRotatef(-10,1,0,0);
-	glTranslatef(0,0,10);
+	//glRotatef(90,0,0,1);
+	//glRotatef(-10,1,0,0);
+	//glTranslatef(0,0,10);
 	glScalef(60,30,1);
 	glBegin(GL_TRIANGLE_FAN);
 	//ajouter un z sinon à cause du zbuffer ça se dessine derrière tout
@@ -119,7 +91,7 @@ void drawMenu(GLuint textureMenu, GLuint textureJouer, GLuint textureQuitter){
 	glVertex3d(-1,1,0);
 	glEnd();
 	endTexture();
-	glPopMatrix();
+	//glPopMatrix();
 
 	//texture Jouer	
 	glPushMatrix();

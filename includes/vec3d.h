@@ -2,6 +2,8 @@
 
 struct Vec {
     float x, y, z;
+
+    float norm();
 };
 
 Vec operator +(const Vec& v1, const Vec& v2);
