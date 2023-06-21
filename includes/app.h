@@ -22,27 +22,12 @@ struct TexturesIndex {
 
     TextureInfos menuTitle, btnPlay, btnQuit;
     TextureInfos levelsTitle, lvl1, lvl2, lvl3, lvl4;
-    TextureInfos endTitle, goMenu;
+    TextureInfos endVictory, endDefeat, goMenu;
+
 
     TextureInfos ball;
 
     std::array<TextureInfos, 10> digits;
-
-    /*
-	GLuint textureMenu = loadTexture("doc/BG.jpg", w, h);
-	GLuint textureJouer = loadTexture("doc/BTN_PLAY.jpg", w, h);
-	GLuint textureQuitter = loadTexture("doc/BTN_EXIT.jpg", w, h);
-	GLuint textureLevelsMenu = loadTexture("doc/BG_LEVELS.jpg", w, h);
-	GLuint textureLevel1 = loadTexture("doc/BTN_LEVEL_1.jpg", w, h);
-	GLuint textureLevel2 = loadTexture("doc/BTN_LEVEL_2.jpg", w, h);
-	GLuint textureLevel3 = loadTexture("doc/BTN_LEVEL_3.jpg", w, h);
-	GLuint textureLevel4 = loadTexture("doc/BTN_LEVEL_4.jpg", w, h);
-//	GLuint textureEndMenu = loadTexture("doc/BG_END.jpg");
-	GLuint textureGoMenu = loadTexture("doc/BTN_GO_MENU.jpg", w, h);
-	GLuint textureScore = loadTexture("doc/SCORE.jpg", w, h);
-	GLuint textureEndMenu = loadTexture("doc/MENU_END.jpg", w, h);
-    */
-
 };
 
 class App {
@@ -66,12 +51,13 @@ class App {
 
         InputsManager &inputs;
         GLFWwindow *window;
+        int selectedLevel;
+        bool victory;
+
     private:
-        
         bool running;
         State state;
 
-        int selectedLevel;
 
         std::array<std::function<void(App&)>, 5> scenes;
 };

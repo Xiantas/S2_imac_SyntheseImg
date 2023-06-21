@@ -37,14 +37,6 @@ class Ball {
         GLint slices, stacks;
         GLuint texture;
 	    GLUquadricObj *quadric;
-
-/*
-	glColor3f(1,1,1);
-	GLUquadricObj *quadric = gluNewQuadric();
-	gluQuadricTexture(quadric, GL_TRUE);
-	gluSphere(quadric, 3, 32, 32);
-	gluDeleteQuadric(quadric);
-    */
 };
 
 class Racket {

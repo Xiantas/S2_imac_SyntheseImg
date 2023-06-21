@@ -51,9 +51,9 @@ void Wall::display(Vec offset) {
 Ball::Ball(Vec pos, float radius, GLuint texture, int slices, int stacks) :
     pos(pos),
     radius(radius),
-    texture(texture),
     slices(slices),
-    stacks(stacks)
+    stacks(stacks),
+    texture(texture)
 {
     quadric = gluNewQuadric();
     gluQuadricOrientation(quadric, GLU_INSIDE);
@@ -118,17 +118,22 @@ void Ball::updateOnCollision(Vec collidePoint) {
 }
 
 Racket::Racket(InputsManager &inputs, float size, float r, float g, float b, float a) :
-    inputs(inputs),
     size(size),
     r(r),
     g(g),
-    b(g),
-    a(g)
+    b(b),
+    a(a),
+    inputs(inputs)
 {}
 
 void Racket::display() {
     float xm = inputs.getMouseX() / (WINDOW_WIDTH/2) - 1;
+    xm = xm < size/2 - 1 ? size/2 - 1 : xm;
+    xm = xm > 1 - size/2 ? 1 - size/2 : xm;
+
     float ym = 1 - inputs.getMouseY() / (WINDOW_HEIGHT/2);
+    ym = ym < size/2 - 1 ? size/2 - 1 : ym;
+    ym = ym > 1 - size/2 ? 1 - size/2 : ym;
 
     Vec pos {xm - size/2, ym - size/2, 0};
 
@@ -151,7 +156,12 @@ void Racket::display() {
 
 void Racket::tryCollide(Ball &ball) {
     float xm = inputs.getMouseX() / (WINDOW_WIDTH/2) - 1;
+    xm = xm < size/2 - 1 ? size/2 - 1 : xm;
+    xm = xm > 1 - size/2 ? 1 - size/2 : xm;
+
     float ym = 1 - inputs.getMouseY() / (WINDOW_HEIGHT/2);
+    ym = ym < size/2 - 1 ? size/2 - 1 : ym;
+    ym = ym > 1 - size/2 ? 1 - size/2 : ym;
 
     Vec pos {xm - size/2, ym - size/2, zAxis};
 
@@ -174,26 +184,15 @@ void Racket::tryCollide(Ball &ball) {
 
     Vec proj = pos + projA + projB;
 
-    if (inputs.isMouseRightDown()) {
-        std::cout << "(" << proj.x << ", " << proj.y << ", " << proj.z << ")\n";
-    }
-
-
-    glColor4f(1, 0, 0, 1);
-    glBegin(GL_POINTS);
-        glVertex3f(proj.x, proj.y, 0);
-    glEnd();
-
-
     if (!ball.contain(proj)) {
         return;
     }
 
     float speed = ball.velocity.norm();
     Vec bounceVelocity {
-        ball.pos.x-pos.x + size/2,
-        ball.pos.y-pos.y + size/2,
-        -0.4
+        ball.pos.x-pos.x - size/2,
+        ball.pos.y-pos.y - size/2,
+        -0.13
     };
 
     ball.velocity = speed * bounceVelocity / bounceVelocity.norm();

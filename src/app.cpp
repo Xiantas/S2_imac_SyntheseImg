@@ -25,7 +25,8 @@ TexturesIndex::TexturesIndex() :
     lvl2("assets/BTN_LEVEL_2.jpg"),
     lvl3("assets/BTN_LEVEL_3.jpg"),
     lvl4("assets/BTN_LEVEL_4.jpg"),
-    endTitle("assets/BG_END.jpg"),
+    endVictory("assets/victory.png"),
+    endDefeat("assets/defeat.png"),
     goMenu("assets/BTN_GO_MENU.jpg"),
     ball("assets/BALL.png"),
     digits{
@@ -51,7 +52,8 @@ TexturesIndex::~TexturesIndex() {
     glDeleteTextures(1, &lvl2.ref);
     glDeleteTextures(1, &lvl3.ref);
     glDeleteTextures(1, &lvl4.ref);
-    glDeleteTextures(1, &endTitle.ref);
+    glDeleteTextures(1, &endVictory.ref);
+    glDeleteTextures(1, &endDefeat.ref);
     glDeleteTextures(1, &goMenu.ref);
     glDeleteTextures(1, &ball.ref);
     for (unsigned i = 0; i < digits.size(); ++i) {
@@ -63,9 +65,10 @@ App::App(GLFWwindow *window) :
     textures(),
     inputs(initInputsSystem(window)),
     window(window),
+    selectedLevel(0),
+    victory(false),
     running(true),
     state(State::Menu),
-    selectedLevel(0),
     scenes{
         scenes::menu,
         scenes::levelSelect,

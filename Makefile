@@ -3,7 +3,7 @@ SRCPATH = src
 OBJPATH = objects
 HEADERS = includes
 BINPATH = bin
-CXXFLAGS = -g -MMD -Iincludes -std=c++20
+CXXFLAGS = -g -MMD -Wall -Wextra -Iincludes -std=c++20
 LIBFLAGS = -lglfw -lGL -lGLU
 #-lGLU -lm
 SOURCES = $(filter-out $(SRCPATH)/main.cpp $(SRCPATH)/treetest.cpp, $(wildcard $(SRCPATH)/*.cpp))
