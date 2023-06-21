@@ -101,7 +101,7 @@ namespace scenes {
                 static_cast<float>(app.textures.lvl3.height) / 500,
                 app.textures.lvl3.ref,
                 [&running, &app] () {
-                    app.selectedLevel = 3;
+                    app.selectedLevel = 2;
                     app.setState(App::State::Playing);
                     running = false;
                 }
@@ -112,7 +112,7 @@ namespace scenes {
                 static_cast<float>(app.textures.lvl4.height) / 500,
                 app.textures.lvl4.ref,
                 [&running, &app] () {
-                    app.selectedLevel = 4;
+                    app.selectedLevel = 3;
                     app.setState(App::State::Playing);
                     running = false;
                 }
@@ -156,14 +156,23 @@ namespace scenes {
 
         Racket racket{inputs, 0.3, 1, 1, 0, 0.5};
 
-        Ball ball{
-            Vec{0, 0, -0.3},
-            .2f,
-            app.textures.ball.ref,
-            10, 10
+        std::vector<Ball> balls;
+        balls.reserve(4);
+
+        for (int i = 0; i <= app.selectedLevel; ++i) {
+            balls.emplace(balls.end(),
+                Vec{0, 0, -0.3},
+                .2f,
+                Vec{
+                    std::array<float, 4>{0.01, 0, -.01, 0}[i],
+                    std::array<float, 4>{0, .01, 0, -.01}[i],
+                    -0.02
+                },
+                app.textures.ball.ref,
+                10, 10
+            );
         };
 
-        ball.velocity = Vec {0, 0, -0.02};
 
         unsigned nbObsacles = 5;
         float lenght = static_cast<float>(2*(nbObsacles+1));
@@ -180,25 +189,27 @@ namespace scenes {
                 racket.zAxis = -offset.z;
             }
 
-            ball.pos += ball.velocity;
-            racket.tryCollide(ball);
-            for (unsigned i = 0; i < walls.size(); ++i) {
-                Vec proj = ball.projectOn(walls[i]);
-                if (ball.contain(proj)) {
-                    ball.updateOnCollision(proj);
+            for (unsigned j = 0; j < balls.size(); ++j) {
+                balls[j].pos += balls[j].velocity;
+                racket.tryCollide(balls[j]);
+                for (unsigned i = 0; i < walls.size(); ++i) {
+                    Vec proj = balls[j].projectOn(walls[i]);
+
+                    if (balls[j].contain(proj)) {
+                        balls[j].updateOnCollision(proj);
+                    }
                 }
-            }
 
-            if (offset.z+ball.pos.z > 1) {
-                running = false;
-                app.victory = false;
-                app.setState(App::State::GameOver);
-            }
+                if (offset.z+balls[j].pos.z > 1) {
+                    running = false;
+                    app.setState(App::State::GameOver);
+                }
 
-            if (-ball.pos.z >= lenght) {
-                running = false;
-                app.victory = true;
-                app.setState(App::State::GameOver);
+                if (-balls[j].pos.z >= lenght) {
+                    running = false;
+                    app.victory = true;
+                    app.setState(App::State::GameOver);
+                }
             }
 
             for (unsigned i = 0; i < walls.size(); ++i) {
@@ -206,12 +217,21 @@ namespace scenes {
             }
 
             glEnable(GL_LIGHTING);
-            float z = ball.pos.z;
-            ball.pos.z += offset.z;
-            ball.display();
-            ball.pos.z = z;
+            for (unsigned i = 0; i < balls.size(); ++i) {
+                balls[i].pos.z += offset.z;
+                balls[i].display();
+            }
             glDisable(GL_LIGHTING);
+            for (unsigned i = 0; i < balls.size(); ++i) {
+                glClear(GL_DEPTH_BUFFER_BIT);
+                balls[i].displayGhost();
+                balls[i].pos.z -= offset.z;
+            }
+
+            glDisable(GL_DEPTH_TEST);
             racket.display();
+            glEnable(GL_DEPTH_TEST);
+
 
             glfwSwapBuffers(app.window);
 

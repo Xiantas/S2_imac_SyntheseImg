@@ -20,7 +20,7 @@ class Wall {
 
 class Ball {
     public:
-        Ball(Vec pos, float radius, GLuint texture, int slices, int stacks);
+        Ball(Vec pos, float radius, Vec velocity, GLuint texture, int slices, int stacks);
         ~Ball();
 
         Vec pos;
@@ -29,6 +29,7 @@ class Ball {
         Vec velocity = Vec{0, 0, 0};
 
         void display();
+        void displayGhost();
         Vec projectOn(Wall& wall);
         bool contain(Vec point);
         void updateOnCollision(Vec collidePoint);

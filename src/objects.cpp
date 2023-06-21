@@ -48,9 +48,10 @@ void Wall::display(Vec offset) {
 	glEnd();
 }
 
-Ball::Ball(Vec pos, float radius, GLuint texture, int slices, int stacks) :
+Ball::Ball(Vec pos, float radius, Vec velocity, GLuint texture, int slices, int stacks) :
     pos(pos),
     radius(radius),
+    velocity(velocity),
     slices(slices),
     stacks(stacks),
     texture(texture)
@@ -69,6 +70,21 @@ void Ball::display() {
 	glPushMatrix();
 	glEnable(GL_TEXTURE_2D);
     glColor3f(1.0f, 1.0f, 1.0f);
+	glBindTexture(GL_TEXTURE_2D, texture);
+
+	glTranslatef(pos.x, pos.y, pos.z);
+    glRotatef(-90, 1, 0, 0);
+
+    gluSphere(quadric, radius, slices, stacks);
+
+	glDisable(GL_TEXTURE_2D);
+	glPopMatrix();
+}
+
+void Ball::displayGhost() {
+	glPushMatrix();
+	glEnable(GL_TEXTURE_2D);
+    glColor4f(1.0f, 1.0f, 1.0f, 0.1f);
 	glBindTexture(GL_TEXTURE_2D, texture);
 
 	glTranslatef(pos.x, pos.y, pos.z);

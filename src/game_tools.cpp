@@ -75,8 +75,64 @@ static const std::array<std::vector<std::vector<Wall>>, 4> OBSTACLES_SETS {
         }
     },
     std::vector<std::vector<Wall>> {
+        std::vector<Wall> {
+            Wall{
+                Vec{-1, -1, 0},
+                Vec{0.7, 0, 0},
+                Vec{0, 2, 0},
+                0.8, 0.4, 0.1
+            },
+            Wall{
+                Vec{-.3, -1, 0},
+                Vec{0.6, 0, 0},
+                Vec{0, .4, 0},
+                0.8, 0.4, 0.1
+            },
+            Wall{
+                Vec{1, -1, 0},
+                Vec{-.7, 0, 0},
+                Vec{0, 2, 0},
+                0.8, 0.4, 0.1
+            }
+        },
+        std::vector<Wall> {
+            Wall{
+                Vec{-.5, -1, 0},
+                Vec{1, 0, 0},
+                Vec{0, 1.5, 0},
+                0.8, 0.4, 0.1
+            },
+            Wall{
+                Vec{-1, 1, 0},
+                Vec{2, 0, 0},
+                Vec{0, -0.5, 0},
+                0.8, 0.4, 0.1
+            }
+        }
     },
     std::vector<std::vector<Wall>> {
+        std::vector<Wall> {
+            Wall{
+                Vec{-1.1, 0, 0},
+                Vec{1.1, 1.1, 0},
+                Vec{1.1, -1.1, 0},
+                0.9, 0.1, 0.1
+            }
+        },
+        std::vector<Wall> {
+            Wall{
+                Vec{-1, -1, 0},
+                Vec{1.2, 0, 0},
+                Vec{0, 2, -1},
+                0.9, 0.1, 0.1
+            },
+            Wall{
+                Vec{.2, 1, 0},
+                Vec{.8, 0, 0},
+                Vec{0, -2, -1},
+                0.73, 0.1, 0.1
+            }
+        }
     }
 };
 
